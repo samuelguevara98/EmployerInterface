@@ -1,15 +1,15 @@
 var inquirer = require('inquirer');
-var engineer = require('./lib/engineer');
-var intern = require('./lib/intern');
-var manager = require('./lib/manager');
-var display = require('display.js')
+var Engineer = require('./lib/engineer');
+var Intern = require('./lib/intern');
+var Manager = require('./lib/manager');
+var display = require('./display')
 
 const employees = []
 
 function createProfile() {
     inquirer.prompt([
         { type: "list",
-        name: "employee",
+        name: "employeeName",
         message: "What is your position?",
         choices: [
             "Engineer",
@@ -20,7 +20,7 @@ function createProfile() {
 
     }
     ]).then(userChoice =>{
-        switch (userChoice.employee) {
+        switch (userChoice.employeeName) {
 
             case "Engineer":
                 addEngineer();
@@ -108,7 +108,7 @@ function createProfile() {
         
             console.log(userChoice);
             
-            const intern = new intern(userChoice.internName, userChoice.internId, userChoice.internEmail, userChoice.internSchool)
+            const intern = new Intern(userChoice.internName, userChoice.internId, userChoice.internEmail, userChoice.internSchool)
 
             employees.push(intern)
 
@@ -146,7 +146,7 @@ function createProfile() {
         
             console.log(userChoice);
             
-            const manager = new manager(userChoice.managerName, userChoice.managerId, userChoice.managerEmail, userChoice.managerOfficeNum)
+            const manager = new Manager(userChoice.managerName, userChoice.managerId, userChoice.managerEmail, userChoice.managerOfficeNum)
 
             employees.push(manager)
 

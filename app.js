@@ -2,7 +2,7 @@ var inquirer = require('inquirer');
 var engineer = require('./lib/engineer');
 var intern = require('./lib/intern');
 var manager = require('./lib/manager');
-
+var display = require('display.js')
 
 const employees = []
 
@@ -35,7 +35,8 @@ function createProfile() {
                 break;
             
             case "All employees are listed":
-                
+                display(employees);
+                break
         }
     })
 }

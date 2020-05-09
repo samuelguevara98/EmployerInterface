@@ -1,8 +1,8 @@
-var inquirer = require('inquirer');
-var Engineer = require('./lib/engineer');
-var Intern = require('./lib/intern');
-var Manager = require('./lib/manager');
-var display = require('./display')
+const inquirer = require('inquirer');
+const Engineer = require('./lib/engineer');
+const Intern = require('./lib/intern');
+const Manager = require('./lib/manager');
+const display = require('./display')
 
 const employees = []
 
@@ -13,7 +13,7 @@ function createProfile() {
         message: "What is your position?",
         choices: [
             "Engineer",
-            "Intern",
+            "Intern", 
             "Manager",
             "All employees are listed"
         ]
@@ -51,7 +51,7 @@ function createProfile() {
             {
                 type: "input",
                 message: "What is your employee ID?",
-                name: "engineerId"
+                name: "engineerID"
             },
 
             {
@@ -63,14 +63,14 @@ function createProfile() {
             {
                 type: "input",
                 message: "What is your GitHub username?",
-                name: "engineerUsername"
+                name: "gitHubUsername"
             },
 
         ]).then(userChoice => {
         
             console.log(userChoice);
-            
-            const engineer = new engineer(userChoice.engineerName, userChoice.engineerId, userChoice.engineerEmail, userChoice.engineerUsername)
+
+            const engineer = new Engineer(userChoice.engineerName, userChoice.engineerID, userChoice.engineerEmail, userChoice.gitHubUsername)
 
             employees.push(engineer)
 
@@ -139,14 +139,14 @@ function createProfile() {
             {
                 type: "input",
                 message: "What is your GitHub username?",
-                name: "managerOfficeNum"
+                name: "managerOfficeNumber"
             },
 
         ]).then(userChoice => {
         
             console.log(userChoice);
             
-            const manager = new Manager(userChoice.managerName, userChoice.managerId, userChoice.managerEmail, userChoice.managerOfficeNum)
+            const manager = new Manager(userChoice.managerName, userChoice.managerID, userChoice.managerEmail, userChoice.managerOfficeNumber)
 
             employees.push(manager)
 

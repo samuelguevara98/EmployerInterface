@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 var employees = apps.employees;
 
-const dirTemp = path.resolve(__dirname, "../Employee-Summary/templates");
+const dirTemp = path.resolve(__dirname, "../EmployerInterface/templates");
 
 const display = (employees) => {
     const html = [];
@@ -24,43 +24,51 @@ const display = (employees) => {
 };
 
 const displayEngineer = engineer => {
-    let temp = fs.readFileSync(path.resolve(dirTemp, "engineer.html"), "utf8");
+    let template = fs.readFileSync(path.resolve(dirTemp, "engineer.html"), "utf8");
 
-    temp = replacePlaceholders(temp, "name", engineer.getName());
-    temp = replacePlaceholders(temp, "role", engineer.getRole());
-    temp = replacePlaceholders(temp, "email", engineer.getEmail());
-    temp = replacePlaceholders(temp, "id", engineer.getId());
-    temp = replacePlaceholders(temp, "github", engineer.getGitHub());    
+    template = replacePlaceholders(template, "name", engineer.getName());
+    template = replacePlaceholders(template, "role", engineer.getRole());
+    template = replacePlaceholders(template, "email", engineer.getEmail());
+    template = replacePlaceholders(template, "id", engineer.getId());
+    template = replacePlaceholders(template, "github", engineer.getGitHub());    
 
-    return temp;
+    return template;
 };
 
 const displayIntern = intern => {
-    let temp = fs.readFileSync(path.resolve(dirTemp, "intern.html"), "utf8");
+    let template = fs.readFileSync(path.resolve(dirTemp, "intern.html"), "utf8");
 
-    temp = replacePlaceholders(temp, "name", intern.getName());
-    temp = replacePlaceholders(temp, "role", intern.getRole());
-    temp = replacePlaceholders(temp, "email", intern.getEmail());
-    temp = replacePlaceholders(temp, "id", intern.getId());
-    temp = replacePlaceholders(temp, "school", intern.getSchool());    
+    template = replacePlaceholders(template, "name", intern.getName());
+    template = replacePlaceholders(template, "role", intern.getRole());
+    template = replacePlaceholders(template, "email", intern.getEmail());
+    template = replacePlaceholders(template, "id", intern.getId());
+    template = replacePlaceholders(template, "school", intern.getSchool());    
 
-    return temp;
+    return template;
 };
 
 const displayManager = manager => {
-    let temp = fs.readFileSync(path.resolve(dirTemp, "manager.html"), "utf8");
+    let template = fs.readFileSync(path.resolve(dirTemp, "manager.html"), "utf8");
 
-    temp = replacePlaceholders(temp, "name", manager.getName());
-    temp = replacePlaceholders(temp, "role", manager.getRole());
-    temp = replacePlaceholders(temp, "email", manager.getEmail());
-    temp = replacePlaceholders(temp, "id", manager.getId());
-    temp = replacePlaceholders(temp, "officeNum", manager.getOfficeNum());    
+    temp = replacePlaceholders(template, "name", manager.getName());
+    template = replacePlaceholders(template, "role", manager.getRole());
+    template = replacePlaceholders(template, "email", manager.getEmail());
+    template = replacePlaceholders(template, "id", manager.getId());
+    template = replacePlaceholders(template, "officeNumber", manager.getOfficeNumber());    
 
-    return temp;
+    return template;
 };
 
 const displayMain = html => {
-    const temp = fs.readFileSync(path)
-}
+    const template = fs.readFileSync(path.resolve(dirTemp, "main.html"), "utf8");
+    const masterHTML = (template, "team", html);
+    const file = path.join(__dirname, "output", "/mainOutput.html");
+    fs.writeFileSync(file, masterHTML);
+};
+
+const replacePlaceholders = (template, placeholder, value) => {
+    const pattern = new RegExp("{{ " + placeholder + " }}", "gm");
+    return template.replace(pattern, value);
+  };
 
 module.exports = display;

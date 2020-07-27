@@ -2,12 +2,12 @@ const inquirer = require('inquirer');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
-const display = require('./display')
+var display = require('./display.js')
 
 const employees = []
 
-function createProfile() {
-    inquirer.prompt([
+async function createProfile() {
+    await inquirer.prompt([
         { type: "list",
         name: "employeeName",
         message: "What is your position?",
@@ -34,14 +34,17 @@ function createProfile() {
                 addManager();
                 break;
             
-            case "All employees are listed":
+            case "All employees are listed": 
+            console.log(display, "**************")
+            console.log(display(employees), "****")
                 display(employees);
+                
                 break
         }
     })
 
-    function addEngineer() {
-        inquirer.prompt([
+    async function addEngineer() {
+        await inquirer.prompt([
             {
                 type: "input",
                 message: "What is your name?",
@@ -66,20 +69,18 @@ function createProfile() {
                 name: "gitHubUsername"
             },
 
-        ]).then(userChoice => {
+        ]).then(async userChoice => {
         
             console.log(userChoice);
 
-            const engineer = new Engineer(userChoice.engineerName, userChoice.engineerID, userChoice.engineerEmail, userChoice.gitHubUsername)
-
-            employees.push(engineer)
+            employees.push(new Engineer(userChoice.engineerName, userChoice.engineerID, userChoice.engineerEmail, userChoice.gitHubUsername))
 
             createProfile();
         })
     }
 
-    function addIntern() {
-        inquirer.prompt([
+    async function addIntern() {
+        await inquirer.prompt([
             {
                 type: "input",
                 message: "What is your name?",
@@ -104,7 +105,7 @@ function createProfile() {
                 name: "internSchool"
             },
 
-        ]).then(userChoice => {
+        ]).then(async userChoice => {
         
             console.log(userChoice);
             
@@ -116,8 +117,8 @@ function createProfile() {
         })
     }
 
-    function addManager() {
-        inquirer.prompt([
+    async function addManager() {
+        await inquirer.prompt([
             {
                 type: "input",
                 message: "What is your name?",
@@ -142,11 +143,11 @@ function createProfile() {
                 name: "managerOfficeNumber"
             },
 
-        ]).then(userChoice => {
+        ]).then(async res => {
         
-            console.log(userChoice);
+            console.log(res);
             
-            const manager = new Manager(userChoice.managerName, userChoice.managerID, userChoice.managerEmail, userChoice.managerOfficeNumber)
+            const manager = new Manager(res.managerName, res.managerID, res.managerEmail, res.managerOfficeNumber)
 
             employees.push(manager)
 

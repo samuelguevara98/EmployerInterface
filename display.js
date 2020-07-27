@@ -1,7 +1,6 @@
 const apps = require("./app");
 const fs = require("fs");
 const path = require("path");
-var employees = apps.employees;
 
 const dirTemp = path.resolve(__dirname, "../EmployerInterface/templates");
 
@@ -15,12 +14,13 @@ const display = (employees) => {
     html.push(employees.filter(employees => employees.getRole() === 'Intern')
     .map(intern => displayIntern(intern))
     );
+
     html.push(employees.filter(employees => employees.getRole() === 'Manager')
     .map(manager => displayManager(manager))
     );
 
-
-    return displayMain(html.join(''));
+    console.log(html, "----")
+    return html.join('');
 };
 
 const displayEngineer = engineer => {

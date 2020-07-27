@@ -35,8 +35,8 @@ async function createProfile() {
                 break;
             
             case "All employees are listed": 
-            console.log(display, "**************")
-            console.log(display(employees), "****")
+            //console.log(display, "**************")
+            //console.log(display(employees), "****")
                 display(employees);
                 
                 break
@@ -145,7 +145,7 @@ async function createProfile() {
 
         ]).then(async res => {
         
-            console.log(res);
+            console.log(res, "********");
             
             const manager = new Manager(res.managerName, res.managerID, res.managerEmail, res.managerOfficeNumber)
 

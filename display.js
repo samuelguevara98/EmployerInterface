@@ -20,7 +20,7 @@ const display = (employees) => {
     );
 
     console.log(html, "----")
-    return html.join('');
+    displayMain(html.join(''));
 };
 
 const displayEngineer = engineer => {
@@ -50,7 +50,7 @@ const displayIntern = intern => {
 const displayManager = manager => {
     let template = fs.readFileSync(path.resolve(dirTemp, "manager.html"), "utf8");
 
-    temp = replacePlaceholders(template, "name", manager.getName());
+    template = replacePlaceholders(template, "name", manager.getName());
     template = replacePlaceholders(template, "role", manager.getRole());
     template = replacePlaceholders(template, "email", manager.getEmail());
     template = replacePlaceholders(template, "id", manager.getId());
